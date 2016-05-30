@@ -30,7 +30,7 @@ def get_rws_per_month(userid, month):
     return float(statPage.find_all("td", {"class": "stat"})[-1].text) #find the last td class=stat
 
 
-def get_possible_months(userid, numMonths):
+def get_all_months(userid, numMonths):
     """
     Returns the possible months to get the rws from
     """
@@ -44,18 +44,18 @@ def get_possible_months(userid, numMonths):
     monthOptions = monthsSelect.find_all("option")
 
     monthVals = [month['value'] for month in monthOptions]
-    limitedMonthVals = monthVals[:numMonths]
-
-    return limitedMonthVals
 
 
+    return monthVals[:numMonths]
 
-def get_rws_stats_from_userid(userid, numMonths):
+
+
+def get_rws_stats_from_userid(userid, numMonths, allMonths):
     """
     Takes an esea user id and returns the rws for the past n months as list
     """
 
-    months = get_possible_months(userid, numMonths)
+    months = allMonths
 
     rwsStats = []
 
